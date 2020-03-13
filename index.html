@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Credit Calculator for Rocket-Studio</title>
+  </head>
+  <body>
+    <div class="credit-calculator">
+      <!-- <div > -->
+      <form action="" class="panel-control">
+        <div class="text-block">Параметры кредитования</div>
+        <div class="slider-block">
+          <!-- <div></div> -->
+
+          <input id="apart-price" type="text" class="value" value="3800000" />
+          <label for="" class="parameter">
+            <span class="">Стоимость квартиры, руб:</span>
+          </label>
+
+          <span class="bar">
+            <span id="apart-price-bar" class="no-default-bar"> </span>
+            <span class="default-bar"></span>
+            <input
+              type="range"
+              min="2700000"
+              max="6200000"
+              value="3800000"
+              class="slider"
+              id="apart-price-range"
+            />
+          </span>
+        </div>
+        <div class="slider-block">
+          <!-- <div></div> -->
+
+          <input id="start-price" type="text" class="value" value="760000" />
+          <label for="" class="parameter">
+            <span class="">Первоначальный взнос, руб:</span>
+          </label>
+
+          <span class="bar">
+            <span id="start-price-bar" class="no-default-bar"> </span>
+            <span class="default-bar"></span>
+            <input
+              type="range"
+              min="15"
+              max="100"
+              value="20"
+              class="slider"
+              id="start-price-range"
+            />
+          </span>
+          <div id="start-price-percentage">20%</div>
+        </div>
+        <div class="slider-block">
+          <!-- <div></div> -->
+
+          <input id="period" type="text" class="value" value="7" />
+          <label for="" class="parameter">
+            <span class="">Срок, лет:</span>
+          </label>
+
+          <span class="bar">
+            <span id="period-bar" class="no-default-bar"> </span>
+            <span class="default-bar"></span>
+            <input
+              type="range"
+              min="1"
+              max="30"
+              value="7"
+              class="slider"
+              id="period-range"
+            />
+          </span>
+        </div>
+      </form>
+      <!-- </div> -->
+      <!-- Block with bank outputs -->
+
+      <div class="banks-output">
+        <div class="bank">
+          <div class="bank-top-info">
+            <div class="bank-logo">
+              <img
+                src="https://kp-varezhki2.ru/wp-content/uploads/sberbank-1.svg"
+                alt=""
+              />
+            </div>
+            <div class="bank-rate">9.3%</div>
+          </div>
+          <div class="bank-bottom-info">
+            <div class="payment-caption">
+              ежемесячный <br />
+              платеж:
+            </div>
+            <div class="payment">
+              <span id="payment-amount-sberbank">43 055</span>
+              ₽
+            </div>
+          </div>
+        </div>
+        <div class="bank">
+          <div class="bank-top-info">
+            <div class="bank-logo">
+              <img
+                src="https://kp-varezhki2.ru/wp-content/uploads/fill-2.svg"
+                alt=""
+              />
+            </div>
+            <div class="bank-rate">8.6%</div>
+          </div>
+          <div class="bank-bottom-info">
+            <div class="payment-caption">
+              ежемесячный <br />
+              платеж:
+            </div>
+            <div class="payment">
+              <span id="payment-amount-sberbank">48 296</span>
+              ₽
+            </div>
+          </div>
+        </div>
+        <div class="bank">
+          <div class="bank-top-info">
+            <div class="bank-logo">
+              <img
+                src="https://kp-varezhki2.ru/wp-content/uploads/sberbank-1.svg"
+                alt=""
+              />
+            </div>
+            <div class="bank-rate">7.99%</div>
+          </div>
+          <div class="bank-bottom-info">
+            <div class="payment-caption">
+              ежемесячный <br />
+              платеж:
+            </div>
+            <div class="payment">
+              <span id="payment-amount-sberbank">47 367</span>
+              ₽
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: "Bw Modelica Cyrillic";
+    src: url("src/fonts/BwModelicaCyrillicDEMO-Medium.woff2");
+  }
+
+  @font-face {
+    font-family: "Bw Modelica Cyrillic Bold";
+    src: url("src/fonts/BwModelicaCyrillicDEMO-Bold.woff2");
+    font-weight: bold;
+  }
+
+  html {
+    font-size: 14px;
+    margin: 0 auto;
+    /* -webkit-tap-highlight-color: transparent; */
+  }
+
+  body {
+    text-align: left;
+    background: #fff;
+    background-size: auto;
+    margin: 0;
+    padding: 0 10px;
+  }
+
+  input:focus {
+    /* box-shadow: 0 0 0px #fff; */
+    /* color: #fff; */
+    outline: none;
+  }
+
+  .credit-calculator {
+    /* padding: 0 2em; */
+    padding-top: 1em;
+    /* width: 100%; */
+  }
+
+  .panel-control {
+    width: 100%;
+    margin-bottom: 2rem;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    padding: 2.6rem 1.6rem;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+
+    /* ----------- */
+
+    outline: none;
+
+    /* ------------ */
+
+    hyphens: manual;
+    font-size: 1rem;
+    color: #212529;
+    line-height: 1.5;
+
+    /* ------------- */
+
+    text-align: left;
+  }
+
+  /* .panel-control::-webkit-panel-control {
+    width: 0.3125rem;
+    height: 0.3125rem;
+  } */
+
+  .text-block {
+    padding: 0 13.125px;
+    font-family: "Bw Modelica Cyrillic Bold", sans-serif;
+    font-size: 1.5rem;
+    color: #2c2f34;
+    outline-color: rgb(44, 47, 52);
+    font-weight: 550;
+
+    /* ------ */
+
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 25%;
+    max-width: 25%;
+
+    /* -------- */
+
+    position: relative;
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+
+  .slider-block {
+    box-sizing: border-box;
+    color: rgb(33, 37, 41);
+    display: block;
+    flex: 0 0 25%;
+    font-size: 1rem;
+    font-family: sans-serif;
+
+    margin-bottom: 0;
+    padding: 0 2rem;
+
+    /* ----- */
+
+    height: 3.3rem;
+    width: 100%;
+    max-width: 30rem;
+    min-height: 1px;
+    position: relative;
+    /* margin-bottom: 1.2rem; */
+    display: block;
+
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    /* ------- */
+  }
+
+  .parameter {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+
+    /* ------- */
+
+    font-size: 1rem;
+    color: #212529;
+    line-height: 1.5;
+
+    outline-color: rgb(33, 37, 41);
+    outline-style: none;
+    outline-width: 0px;
+
+    text-size-adjust: 100%;
+  }
+
+  .value {
+    padding: 1.5625rem 0.875rem 0.625rem 1rem;
+    font-size: 1rem;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    border: 0.0625rem solid #d9d9d9;
+    /* border-radius: 0; */
+    border-bottom: 2px solid rgb(238, 238, 238);
+    /* border-color: rgb(217, 217, 217); */
+    border-bottom-color: rgb(222, 228, 236);
+    font-family: "Fira Sans", sans-serif;
+    color: #363636;
+    display: block;
+
+    line-height: 1rem;
+
+    word-spacing: 0px;
+  }
+
+  .parameter span {
+    font-family: "Fira Sans", sans-serif;
+    font-size: 1.07rem;
+    color: #929292;
+    box-sizing: border-box;
+
+    /* ------------ */
+
+    top: 0.8rem;
+    margin-left: 2rem !important;
+
+    cursor: text;
+    position: absolute;
+    left: 1rem;
+
+    line-height: 1.5;
+
+    outline-color: rgb(146, 146, 146);
+    outline-style: none;
+    outline-width: 0px;
+
+    text-size-adjust: 100%;
+    transform: matrix(0.7, 0, 0, 0.7, 0, 0);
+    transform-origin: 0px -21px;
+    transition-delay: 0s;
+    transition-duration: 0.2s;
+    transition-property: all;
+    transition-timing-function: ease-in-out;
+  }
+
+  .bar {
+    display: block;
+    width: 100%;
+    position: relative;
+    top: -4.75rem;
+  }
+
+  .no-default-bar {
+    top: 38px;
+    height: 2px;
+    width: 50%;
+    background-color: rgba(74, 32, 80, 1);
+    border-radius: 4px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    /* color: rgb(33, 37, 41); */
+    z-index: 1;
+
+    /* ---------- */
+
+    position: absolute;
+    display: block;
+    overflow: hidden;
+    /* opacity: 1; */
+    outline: none !important;
+  }
+
+  .default-bar {
+    top: 38px;
+    height: 2px;
+    width: 100%;
+    /* background-color: rgba(74, 32, 80, 1); */
+    border-radius: 4px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    background-color: rgb(222, 228, 236);
+    z-index: 0;
+
+    /* ---------- */
+
+    position: absolute;
+    display: block;
+    overflow: hidden;
+    /* opacity: 1; */
+    outline: none !important;
+  }
+
+  /* .container {
+      width: 20rem;
+      margin: 0 auto;
+    } */
+
+  /* .slider-block {
+    width: 100%; Width of the outside container
+  } */
+
+  /* The slider itself */
+  .slider {
+    z-index: 1;
+    -webkit-appearance: none; /* Override default CSS styles */
+    appearance: none;
+    /* width: 100%; Full-width */
+    height: 1px; /* Specified height */
+    background: transparent; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 1; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+    transition: opacity 0.2s;
+    position: absolute;
+    top: 38px;
+    /* display: */
+
+    /* ------ */
+
+    /* border-radius: 0; */
+    /* border-bottom: 2px solid #dee4ec; */
+    /* font-family: "Fira Sans", sans-serif; */
+    /* color: #363636; */
+    /* font-size: 1rem; */
+
+    letter-spacing: 0;
+
+    display: block;
+    /* padding: 1.5625rem 0.875rem 0.625rem 1rem; */
+
+    box-sizing: border-box;
+    /* height: 100%; */
+    width: 100%;
+    /* border: 0.0625rem solid rgb(222, 228, 236); */
+
+    overflow: visible;
+
+    margin: 0;
+
+    hyphens: manual;
+  }
+
+  /* Mouse-over effects */
+  .slider:hover {
+    /* opacity: 1; Fully shown on mouse-over */
+  }
+
+  /* The range of the slider
+    .slider::myrange {
+    } */
+
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+  .slider::-webkit-slider-thumb {
+    /* z-index: 2; */
+    border-radius: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 255, 0.3);
+    border: 3px solid #fff;
+
+    /* ----------------- */
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 16px; /* Set a specific slider handle width */
+    height: 16px; /* Slider handle height */
+    background: rgb(74, 32, 80); /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+
+  .slider::-moz-range-thumb {
+    /* z-index: 2; */
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: rgb(74, 32, 80); /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+
+  .banks-output {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 1.25rem;
+
+    box-sizing: border-box;
+
+    outline: none;
+
+    hyphens: manual;
+
+    /* body jupiter */
+
+    font-size: 1rem;
+    color: #212529;
+    line-height: 1.5;
+
+    /* body */
+
+    text-align: left;
+
+    /* html */
+
+    font-family: sans-serif;
+  }
+
+  .bank {
+    padding: 1.615rem 1.25rem 1.375rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 10.6rem;
+    box-sizing: border-box;
+
+    background-color: #13b75f;
+  }
+
+  .bank-top-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    box-sizing: border-box;
+
+    outline: none;
+
+    font-size: 1rem;
+    color: #212529;
+    line-height: 1.5;
+  }
+
+  .bank-bottom-info {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    font-size: 1rem;
+    color: #212529;
+    line-height: 1.5;
+
+    hyphens: manual;
+  }
+
+  .bank-logo {
+    /* html and body */
+
+    box-sizing: border-box;
+    outline: none;
+    hyphens: manual;
+    font-size: 1rem;
+    color: #212529;
+    line-height: 1.5;
+  }
+
+  .bank-logo img {
+    height: auto;
+    max-width: 100%;
+    border: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+    box-sizing: border-box;
+
+    vertical-align: middle;
+
+    outline: none;
+
+    hyphens: manual;
+  }
+
+  .bank-rate {
+    font-family: "Bw Modelica Cyrillic Bold";
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.54);
+    line-height: 2.5rem;
+
+    box-sizing: border-box;
+
+    outline: none;
+
+    hyphens: manual;
+  }
+
+  .payment-caption {
+    font-family: "Bw Modelica Cyrillic Medium", sans-serif;
+    font-size: 0.875rem;
+    color: #fff;
+    text-align: right;
+    line-height: 1rem;
+
+    box-sizing: border-box;
+
+    outline: none;
+
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .payment {
+    font-family: "Bw Modelica Cyrillic Bold";
+    font-size: 2.125rem;
+    color: #fff;
+    margin-left: 1rem;
+
+    box-sizing: border-box;
+
+    outline: none;
+
+    hyphens: manual;
+  }
+
+  .payment span {
+    box-sizing: border-box;
+  }
+
+  #start-price-percentage {
+    position: absolute;
+    right: 2rem;
+    top: 1.4rem;
+    font-family: "Fira Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #dadbde;
+
+    box-sizing: border-box;
+
+    line-height: 1.5;
+  }
+</style>
