@@ -10,16 +10,6 @@ const defaultParameterTwo = 20;
 
 const matrixOfPercents = [9.3, 8.6, 7.99, 8.15, 7.3, 8.5, 10, 9.1, 8.49];
 
-// const sberbank = 9.3,
-//   vtb = 8.6,
-//   akBars = 7.99,
-//   mkb = 8.15,
-//   domrf = 7.3,
-//   vozrochdenie = 8.5,
-//   rosSelchoz = 10,
-//   psb = 9.1,
-//   trans = 8.49;
-
 const matrixOfColors = [
   "#28a745",
   "#009FDF",
@@ -34,20 +24,6 @@ const matrixOfColors = [
 
 var percentOne, percentTwo, percentThree;
 
-// var paymentElSberbank = document.getElementById("payment-amount-sberbank");
-// var paymentElVtb = document.getElementById("payment-amount-vtb");
-// var paymentElAkBars = document.getElementById("payment-amount-akbars");
-
-// var paymentElMkb = document.getElementById("payment-amount-mkb");
-// var paymentElDomrf = document.getElementById("payment-amount-domrf");
-// var paymentElVozrochdenie = document.getElementById(
-//   "payment-amount-vozrochdenie"
-// );
-
-// var paymentElRosSelchoz = document.getElementById("payment-amount-rosselchoz");
-// var paymentElPsb = document.getElementById("payment-amount-psb");
-// var paymentElTrans = document.getElementById("payment-amount-trans");
-
 var bankElements = document.getElementsByClassName("bank");
 var childBankElements = document.getElementsByClassName("payment-amount");
 
@@ -56,38 +32,39 @@ for (let i = 0; i < bankElements.length; i++) {
   bankElements[i].style.backgroundColor = matrixOfColors[i];
 }
 
-// first parameter
+// first parameter values and elements
 
 let sliderOne = document.getElementById("apart-price-range");
 let outputOne = document.getElementById("apart-price");
 let barOne = document.getElementById("apart-price-bar");
 
-// second parameter
+// second parameter values and elements
 
 let sliderTwo = document.getElementById("start-price-range");
 let outputTwo = document.getElementById("start-price");
 let barTwo = document.getElementById("start-price-bar");
 let anotherOutputTwo = document.getElementById("start-price-percentage");
 
-// third parameter
+// third parameter values and elements
 
 let sliderThree = document.getElementById("period-range");
 let outputThree = document.getElementById("period");
 let barThree = document.getElementById("period-bar");
 
-// Display the default slider's (first and second) values with indents
+// Display the default slider's (first, second, third) values with indents
 
 outputOne.value = numberWithSpaces(sliderOne.value);
 outputTwo.value = numberWithSpaces(
   Math.floor((sliderOne.value * sliderTwo.value) / 100)
 );
+outputThree.value = sliderThree.value;
 
-// Default bar positions
+// Default bar's positions
 
 percentOne =
   (sliderOne.value / minParameterOne - 1) /
   (maxParameterOne / minParameterOne - 1);
-barOne.style.width = `${percentOne * 100}%`; // display the default position of the bar
+barOne.style.width = `${percentOne * 100}%`;
 
 percentTwo =
   (sliderTwo.value / minParameterTwo - 1) /
@@ -99,10 +76,10 @@ percentThree =
   (maxParameterThree / minParameterThree - 1);
 barThree.style.width = `${percentThree * 100}%`;
 
-outputThree.value = numberWithSpaces(sliderThree.value);
-
-// Update the current slider value (each time you drag the slider handle)
+// update the current slider value (each time you drag the slider handle)
+// handle event listeners on input event
 // and adjust no-default-bar's to certain width depend on values
+// calculate every month payment for each bank
 
 sliderOne.oninput = function() {
   outputOne.value = numberWithSpaces(this.value);
@@ -113,7 +90,7 @@ sliderOne.oninput = function() {
 
   barOne.style.width = `${percentOne * 100}%`;
 
-  //update output value for start price
+  //update output value of start price to default
   sliderTwo.value = defaultParameterTwo;
 
   outputTwo.value = numberWithSpaces(
@@ -126,11 +103,6 @@ sliderOne.oninput = function() {
 
   barTwo.style.width = `${percentTwo * 100}%`;
   anotherOutputTwo.innerHTML = `${defaultParameterTwo}%`;
-
-  // set default 20% start price from current apart price
-  // outputTwo.value = numberWithSpaces(
-  //   Math.floor((sliderOne.value * defaultParameterTwo) / 100)
-  // );
 
   [...childBankElements].forEach((element, index) => {
     element.innerHTML = numberWithSpaces(
@@ -147,6 +119,7 @@ sliderOne.oninput = function() {
 };
 
 outputOne.oninput = function() {
+  this.value = validationInput(this.value);
   sliderOne.value = numberWithoutSpaces(this.value);
   this.value = numberWithSpaces(+numberWithoutSpaces(this.value));
 
@@ -169,9 +142,6 @@ outputOne.oninput = function() {
 
   barTwo.style.width = `${percentTwo * 100}%`;
   anotherOutputTwo.innerHTML = `${defaultParameterTwo}%`;
-
-  // set default 20% start price from current apart price
-  // defaultStartPrice();
 
   [...childBankElements].forEach((element, index) => {
     element.innerHTML = numberWithSpaces(
@@ -215,6 +185,7 @@ sliderTwo.oninput = function() {
 };
 
 outputTwo.oninput = function() {
+  this.value = validationInput(this.value);
   this.value = numberWithSpaces(+numberWithoutSpaces(this.value));
 
   const temp = Math.floor(
@@ -269,9 +240,15 @@ sliderThree.oninput = function() {
 };
 
 outputThree.oninput = function() {
-  this.value = numberWithSpaces(+numberWithoutSpaces(this.value));
+  this.value = validationInput(this.value);
 
-  sliderThree.value = numberWithoutSpaces(this.value);
+  // limitation for output of third parameter
+
+  if (this.value > 30) {
+    this.value = 30;
+  }
+
+  sliderThree.value = this.value;
 
   percentThree =
     (sliderThree.value / minParameterThree - 1) /
@@ -293,15 +270,19 @@ outputThree.oninput = function() {
   });
 };
 
+// function formating numbers to format 'xxx xxx ...'
+
 function numberWithSpaces(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
+
+// function with regular expression to exclude spaces from numbers string
 
 function numberWithoutSpaces(x) {
   return x.toString().replace(/\s/g, "");
 }
 
-// function defaultStartPrice() {}
+// function for calculating credit
 
 function annuityCredit(percentageRateYearly, apartPrice, startPrice, period) {
   if (period == 0) {
@@ -309,9 +290,19 @@ function annuityCredit(percentageRateYearly, apartPrice, startPrice, period) {
   } else {
     let percentageRateMonthly = percentageRateYearly / 12 / 100;
     let temp = Math.pow(1 + percentageRateMonthly, period * 12);
+
+    // coefficeient annuity for calculating annuity every month payment
+    // formula taken from 'https://journal.tinkoff.ru/guide/credit-payment/#one'
+
     let coefficient = (temp * percentageRateMonthly) / (temp - 1);
     let everyMonthPayment = (apartPrice - startPrice) * coefficient;
 
     return everyMonthPayment > 0 ? everyMonthPayment : 0;
   }
+}
+
+// validation for text inputs with regexp (0-9 only characters)
+
+function validationInput(x) {
+  return x.replace(/[^0-9]/g, "");
 }
