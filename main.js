@@ -8,19 +8,53 @@ const minParameterOne = 2700000,
 
 const defaultParameterTwo = 20;
 
-const sberbank = 9.3,
-  vtb = 8.6,
-  akBars = 7.99,
-  mkb = 8.15,
-  rf = 7.3,
-  vozrochdenie = 8.5,
-  rosSelchoz = 10,
-  psb = 9.1,
-  transCapital = 8.49;
+const matrixOfPercents = [9.3, 8.6, 7.99, 8.15, 7.3, 8.5, 10, 9.1, 8.49];
+
+// const sberbank = 9.3,
+//   vtb = 8.6,
+//   akBars = 7.99,
+//   mkb = 8.15,
+//   domrf = 7.3,
+//   vozrochdenie = 8.5,
+//   rosSelchoz = 10,
+//   psb = 9.1,
+//   trans = 8.49;
+
+const matrixOfColors = [
+  "#28a745",
+  "#009FDF",
+  "#28a745",
+  "#BB0032",
+  "#343a40",
+  "#1E4679",
+  "#245F34",
+  "#2B2C84",
+  "#00AAA9"
+];
 
 var percentOne, percentTwo, percentThree;
 
-var paymentElSberbank = document.getElementById("payment-amount-sberbank");
+// var paymentElSberbank = document.getElementById("payment-amount-sberbank");
+// var paymentElVtb = document.getElementById("payment-amount-vtb");
+// var paymentElAkBars = document.getElementById("payment-amount-akbars");
+
+// var paymentElMkb = document.getElementById("payment-amount-mkb");
+// var paymentElDomrf = document.getElementById("payment-amount-domrf");
+// var paymentElVozrochdenie = document.getElementById(
+//   "payment-amount-vozrochdenie"
+// );
+
+// var paymentElRosSelchoz = document.getElementById("payment-amount-rosselchoz");
+// var paymentElPsb = document.getElementById("payment-amount-psb");
+// var paymentElTrans = document.getElementById("payment-amount-trans");
+
+var bankElements = document.getElementsByClassName("bank");
+var childBankElements = document.getElementsByClassName("payment-amount");
+
+// set colors of all bank's divs
+for (let i = 0; i < bankElements.length; i++) {
+  bankElements[i].style.backgroundColor = matrixOfColors[i];
+}
 
 // first parameter
 
@@ -97,16 +131,19 @@ sliderOne.oninput = function() {
   // outputTwo.value = numberWithSpaces(
   //   Math.floor((sliderOne.value * defaultParameterTwo) / 100)
   // );
-  paymentElSberbank.innerHTML = numberWithSpaces(
-    Math.floor(
-      annuityCredit(
-        sberbank,
-        this.value,
-        numberWithoutSpaces(outputTwo.value),
-        sliderThree.value
+
+  [...childBankElements].forEach((element, index) => {
+    element.innerHTML = numberWithSpaces(
+      Math.floor(
+        annuityCredit(
+          matrixOfPercents[index],
+          this.value,
+          numberWithoutSpaces(outputTwo.value),
+          sliderThree.value
+        )
       )
-    )
-  );
+    );
+  });
 };
 
 outputOne.oninput = function() {
@@ -136,16 +173,18 @@ outputOne.oninput = function() {
   // set default 20% start price from current apart price
   // defaultStartPrice();
 
-  paymentElSberbank.innerHTML = numberWithSpaces(
-    Math.floor(
-      annuityCredit(
-        sberbank,
-        numberWithoutSpaces(outputOne.value),
-        numberWithoutSpaces(outputTwo.value),
-        sliderThree.value
+  [...childBankElements].forEach((element, index) => {
+    element.innerHTML = numberWithSpaces(
+      Math.floor(
+        annuityCredit(
+          matrixOfPercents[index],
+          numberWithoutSpaces(outputOne.value),
+          numberWithoutSpaces(outputTwo.value),
+          sliderThree.value
+        )
       )
-    )
-  );
+    );
+  });
 };
 
 sliderTwo.oninput = function() {
@@ -161,16 +200,18 @@ sliderTwo.oninput = function() {
   barTwo.style.width = `${percentTwo * 100}%`;
   anotherOutputTwo.innerHTML = `${this.value}%`;
 
-  paymentElSberbank.innerHTML = numberWithSpaces(
-    Math.floor(
-      annuityCredit(
-        sberbank,
-        numberWithoutSpaces(outputOne.value),
-        numberWithoutSpaces(outputTwo.value),
-        sliderThree.value
+  [...childBankElements].forEach((element, index) => {
+    element.innerHTML = numberWithSpaces(
+      Math.floor(
+        annuityCredit(
+          matrixOfPercents[index],
+          numberWithoutSpaces(outputOne.value),
+          numberWithoutSpaces(outputTwo.value),
+          sliderThree.value
+        )
       )
-    )
-  );
+    );
+  });
 };
 
 outputTwo.oninput = function() {
@@ -190,16 +231,18 @@ outputTwo.oninput = function() {
   barTwo.style.width = `${percentTwo * 100}%`;
   anotherOutputTwo.innerHTML = temp > 100 ? `> 100%` : `${temp}%`;
 
-  paymentElSberbank.innerHTML = numberWithSpaces(
-    Math.floor(
-      annuityCredit(
-        sberbank,
-        numberWithoutSpaces(outputOne.value),
-        numberWithoutSpaces(outputTwo.value),
-        sliderThree.value
+  [...childBankElements].forEach((element, index) => {
+    element.innerHTML = numberWithSpaces(
+      Math.floor(
+        annuityCredit(
+          matrixOfPercents[index],
+          numberWithoutSpaces(outputOne.value),
+          numberWithoutSpaces(outputTwo.value),
+          sliderThree.value
+        )
       )
-    )
-  );
+    );
+  });
 };
 
 sliderThree.oninput = function() {
@@ -211,16 +254,18 @@ sliderThree.oninput = function() {
 
   barThree.style.width = `${percentThree * 100}%`;
 
-  paymentElSberbank.innerHTML = numberWithSpaces(
-    Math.floor(
-      annuityCredit(
-        sberbank,
-        numberWithoutSpaces(outputOne.value),
-        numberWithoutSpaces(outputTwo.value),
-        this.value
+  [...childBankElements].forEach((element, index) => {
+    element.innerHTML = numberWithSpaces(
+      Math.floor(
+        annuityCredit(
+          matrixOfPercents[index],
+          numberWithoutSpaces(outputOne.value),
+          numberWithoutSpaces(outputTwo.value),
+          this.value
+        )
       )
-    )
-  );
+    );
+  });
 };
 
 outputThree.oninput = function() {
@@ -234,16 +279,18 @@ outputThree.oninput = function() {
 
   barThree.style.width = `${percentThree * 100}%`;
 
-  paymentElSberbank.innerHTML = numberWithSpaces(
-    Math.floor(
-      annuityCredit(
-        sberbank,
-        numberWithoutSpaces(outputOne.value),
-        numberWithoutSpaces(outputTwo.value),
-        this.value
+  [...childBankElements].forEach((element, index) => {
+    element.innerHTML = numberWithSpaces(
+      Math.floor(
+        annuityCredit(
+          matrixOfPercents[index],
+          numberWithoutSpaces(outputOne.value),
+          numberWithoutSpaces(outputTwo.value),
+          this.value
+        )
       )
-    )
-  );
+    );
+  });
 };
 
 function numberWithSpaces(x) {
