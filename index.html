@@ -80,7 +80,7 @@
       <div class="banks-output">
         <div class="bank">
           <div class="bank-top-info">
-            <div class="bank-logo">
+            <div id="sberbank" class="bank-logo">
               <img
                 src="https://kp-varezhki2.ru/wp-content/uploads/sberbank-1.svg"
                 alt=""
@@ -104,7 +104,7 @@
 
         <div class="bank">
           <div class="bank-top-info">
-            <div class="bank-logo">
+            <div id="vtb" class="bank-logo">
               <img
                 src="https://kp-varezhki2.ru/wp-content/uploads/fill-2.svg"
                 alt=""
@@ -125,7 +125,7 @@
         </div>
 
         <div class="bank">
-          <div class="bank-top-info">
+          <div id="akbars" class="bank-top-info">
             <div class="bank-logo">
               <img
                 src="https://kp-varezhki2.ru/wp-content/uploads/group-2329.svg"
@@ -912,8 +912,48 @@
       margin-left: 0.5rem;
     }
 
-    .bank-logo:nth-child(1) {
-      content: url(/src/images/sberbank.svg);
+    .bank:nth-child(1) .bank-logo {
+      content: url(src/images/sberbank.svg);
+    }
+
+    .bank:nth-child(2) .bank-logo {
+      content: url(src/images/vtb.svg);
+    }
+
+    .bank:nth-child(3) .bank-logo {
+      content: url(src/images/akbars.svg);
+    }
+
+    .bank:nth-child(4) .bank-logo {
+      content: url(src/images/mkb.svg);
+    }
+
+    .bank:nth-child(5) .bank-logo {
+      content: url(src/images/domrf.svg);
+    }
+
+    .bank:nth-child(6) .bank-logo {
+      content: url(src/images/vozrozhdenie.svg);
+    }
+
+    .bank:nth-child(7) .bank-logo {
+      content: url(src/images/rosselhoz.svg);
+    }
+
+    .bank:nth-child(8) .bank-logo {
+      content: url(src/images/psb.svg);
+    }
+
+    .bank:nth-child(9) .bank-logo {
+      content: url(src/images/transkapital.svg);
+    }
+
+    .slider-block:nth-child(4) {
+      margin-bottom: 0rem !important;
+    }
+
+    .payment-caption br {
+      display: none;
     }
 
     .bank-rate {
