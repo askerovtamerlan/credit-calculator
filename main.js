@@ -25,12 +25,21 @@ const matrixOfColors = [
 var percentOne, percentTwo, percentThree;
 
 var bankElements = document.getElementsByClassName("bank");
+var bankLogoContainers = document.getElementsByClassName("bank-logo");
 var childBankElements = document.getElementsByClassName("payment-amount");
 
 // set colors of all bank's divs
 for (let i = 0; i < bankElements.length; i++) {
   bankElements[i].style.backgroundColor = matrixOfColors[i];
 }
+
+// window.onresize = function() {
+//   if (window.innerWidth < 767) {
+//     for (let i = 0; i < bankLogoContainers.length; i++) {
+//       bankLogoContainers[i].firstChild.style.fill = matrixOfColors[i];
+//     }
+//   }
+// };
 
 // first parameter values and elements
 
