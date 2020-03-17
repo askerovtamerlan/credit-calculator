@@ -11,7 +11,7 @@ const defaultParameterTwo = 20;
 const matrixOfPercents = [9.3, 8.6, 7.99, 8.15, 7.3, 8.5, 10, 9.1, 8.49];
 
 const matrixOfColors = [
-  "#28a745",
+  "#13B75F",
   "#009FDF",
   "#28a745",
   "#BB0032",
