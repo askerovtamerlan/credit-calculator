@@ -481,6 +481,12 @@ input:focus {
   }
 }
 
+@media only screen and (min-width: 1320px) {
+  .panel-control {
+    box-shadow: none;
+  }
+}
+
 @media only screen and (min-width: 1500px) {
   .bar {
     top: -3.8rem;
