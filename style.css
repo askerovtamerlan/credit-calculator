@@ -53,7 +53,7 @@ body {
 
 main {
   max-width: 1320px;
-  /* min-width: 270px; */
+  min-width: 320px;
   margin: 0 auto;
   position: relative;
 }
@@ -408,12 +408,14 @@ input:focus {
   font-size: 2.5rem;
   color: rgba(255, 255, 255, 0.54);
   line-height: 2.5rem;
-
   box-sizing: border-box;
-
   outline: none;
-
   hyphens: manual;
+}
+
+.bank-rate .description-one,
+.bank-rate .description-two {
+  display: none;
 }
 
 .payment-caption {
@@ -675,7 +677,30 @@ input:focus {
     margin-bottom: 0;
   }
 
+  .bank {
+    min-height: 11rem;
+  }
+
+  .bank-rate {
+    margin-top: 0;
+  }
+
+  .bank-rate .description-one {
+    display: block;
+    font-family: "Bw Modelica Cyrillic";
+    font-size: 1rem;
+  }
+
+  .bank-rate .description-two {
+    display: inline-block;
+  }
+
+  /* .bank-rate::before {
+    content: "от ";
+  } */
+
   .parameter span {
     margin-left: 0.4rem !important;
+    font-family: "Fira Sans Bold";
   }
 }
